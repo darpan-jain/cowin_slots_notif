@@ -1,4 +1,4 @@
-# COWIN Slots
+# Vaccine Slots Notifactions - https://cowin-slots-notif.herokuapp.com/
 
 ## Contents
 
@@ -15,22 +15,40 @@ This repository contains the code for creating a web server to send updates abou
 
 ## Repository Structure
 
+```
+├── app
+│   ├── configs
+│   │   └── sample_config.py
+│   └── main.py
+├── check_scheduler
+│   ├── run_checks.py
+│   └── utils
+│       ├── add_users.py
+│       ├── check_slots.py
+│       ├── emails.py
+│       ├── loggers.py
+│       ├── logging_setup.py
+│       └── send_notifs.py
+├── Procfile
+├── README.md
+├── requirements.txt
+└── templates
+    ├── index.html
+    └── thank_you.html
+```
+
 ***
 
-## Results
-Upon running `main.py`, the results are as shown below. 
+## Webpage
+Upon running `main.py`, the home page will look like this - 
 
-<p align="center">
-  <img src="https://github.com/darpan-jain/cowin_slots_notif-develop/static/images/result_form.png" width="640px" height="480px"/>
-</p>
+![Image of Yaktocat](https://github.com/darpan-jain/cowin_slots_notif-develop/static/images/result_form.png)
 
 ***
 
 ## Prerequisites
-All the required dependencies can be installed by running the command `pip install -r requirements.txt`
+All the required dependencies can be installed by running the command `pip3 install -r requirements.txt`
 ***
 
-## Hosted On
-Visit - https://cowin-slots-notif.herokuapp.com/
 
 ***
