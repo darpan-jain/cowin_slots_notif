@@ -1,9 +1,9 @@
 import time
-
 import requests
 import pandas as pd
-import check_scheduler.utils.loggers as lg
 from collections import Counter
+
+import check_scheduler.utils.loggers as lg
 
 class CheckForSlots:
 
@@ -48,7 +48,7 @@ class CheckForSlots:
 			elif resp.status_code == 403:
 				lg.app.debug(f"API {resp.url} returned non-200 status code {resp.status_code}")
 				lg.app.debug(f"Retrying times {retry_count}")
-				time.sleep(3) # Sleep for 3 secs before retrying
+				time.sleep(3) # Wait for 3 secs before retrying
 				self.get_response(url, retry_count+1)
 
 			else:
