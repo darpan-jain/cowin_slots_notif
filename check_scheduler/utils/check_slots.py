@@ -1,3 +1,5 @@
+import time
+
 import requests
 import pandas as pd
 import check_scheduler.utils.loggers as lg
@@ -26,9 +28,9 @@ class CheckForSlots:
 		return centers
 
 	def get_response(self, url, retry_count=0):
-		# headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.51"}
+		headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.51"}
 		if (retry_count < self.max_retries):
-			resp = requests.get(url)
+			resp = requests.get(url, headers=headers, timeout=5.0)
 			valid_centers = pd.DataFrame()
 			self.status_codes.append((resp.status_code))
 
@@ -46,6 +48,7 @@ class CheckForSlots:
 			elif resp.status_code == 403:
 				lg.app.debug(f"API {resp.url} returned non-200 status code {resp.status_code}")
 				lg.app.debug(f"Retrying times {retry_count}")
+				time.sleep(3) # Sleep for 3 secs before retrying
 				self.get_response(url, retry_count+1)
 
 			else:
