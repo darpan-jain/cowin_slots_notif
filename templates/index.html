@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>COVID-19 Vaccine Availability</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', path='/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/assets/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+     <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+  </head>
+
+  <body class="index">
+
+      <!-- ======= Form Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container">
+
+          <div class="section-title">
+            <h1>VACCINE SLOTS NOTIFICATION</h1>
+            <p>Currently only done for Pune district, support for more districts incoming soon!</p>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-lg-8 mt-5 mt-lg-0">
+              <form action="{{ url_for('submit')}}" method="post" class="php-email-form">
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <fieldset>
+                      <input type="text" id="fname" name="firstname" class="form-control" placeholder="First Name" required>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <fieldset>
+                      <input type="text" id="lname" name="lastname" class="form-control" placeholder="Last Name" required>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <fieldset>
+                    <input type="tel" id="mob" name="number" class="form-control" placeholder="Mobile Number" pattern="[0-9]{10}}" required>
+                  </fieldset>
+                </div>
+                <div class="form-group mt-3">
+                  <fieldset>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                  </fieldset>
+                </div>
+                <div class="my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">You have subscribed!</div>
+                </div>
+                <div class="text-center btn">
+                  <fieldset>
+                    <button type="submit">Subscribe</button>
+                  </fieldset>
+                </div>
+              </form>
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Contact Section -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="container">
+        <h3>Reach Out</h3>
+        <p>Send your feedback or request for any features!</p>
+        <div class="social-links">
+          <a href="https://github.com/darpan-jain" class="github"><i class="bx bxl-github bx-tada-hover"></i></a>
+          <a href="https://www.instagram.com/belovedpizza/" class="instagram"><i class="bx bxl-instagram bx-tada-hover"></i></a>
+          <a href="https://www.linkedin.com/in/darpan-jain-044b5411b/" class="linkedin"><i class="bx bxl-linkedin bx-tada-hover"></i></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+
+</html>
