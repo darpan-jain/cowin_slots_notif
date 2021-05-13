@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Bad Request</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', path='/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/assets/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+
+  </head>
+
+  <body>
+  <section id="contact" class="contact">
+    <div class="container">
+          <br>
+          <br>
+          <hr>
+          <h1 style="text-align: center">Incorrect user details added</h1>
+          <br>
+          <h3 style="text-align: center;">Please try again with proper details</h3>
+          <br>
+          <div style="margin-top: 50px; text-align:center;" class="center">
+              <img height="60%" width="80%"  src="{{ url_for('static', path='/images/bad_request.jpg') }}">
+          </div>
+          <br>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="container">
+      <h3>Reach Out</h3>
+      <p>Send your feedback or request for any features!</p>
+      <div class="social-links">
+        <a href="https://github.com/darpan-jain" class="github"><i class="bx bxl-github bx-tada-hover"></i></a>
+        <a href="https://www.instagram.com/belovedpizza/" class="instagram"><i class="bx bxl-instagram bx-tada-hover"></i></a>
+        <a href="https://www.linkedin.com/in/darpan-jain-044b5411b/" class="linkedin"><i class="bx bxl-linkedin bx-tada-hover"></i></a>
+        <a href="http://darpan-jain.github.io"><i class="bx bx-globe bx-tada-hover"></i></a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
