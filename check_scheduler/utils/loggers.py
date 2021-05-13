@@ -1,5 +1,4 @@
 from check_scheduler.utils.logging_setup import setup_logger
-import configparser
 import os
 
 if not os.path.exists('logs'):
