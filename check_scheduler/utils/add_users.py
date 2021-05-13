@@ -10,6 +10,7 @@ class HandleData:
 		self.config = config
 		self.path = "check_scheduler/utils/data/"
 		self.data_file_name = "data.csv"
+		self.s3_data_file = self.config.s3_file_name
 		self.data_path = self.path+self.data_file_name
 		self.session = boto3.Session(
 			aws_access_key_id=self.config.aws_access_key,
@@ -31,12 +32,14 @@ class HandleData:
 			self.upload_csv()
 
 	def upload_csv(self):
-		self.s3_resource.Bucket(self.bucket_name).upload_file(Filename=self.data_path, Key="user_data.csv")
+		self.lg.web.info("Writing user db to csv file.")
+		self.user_db.to_csv(self.data_path, index=False)
+		self.s3_resource.Bucket(self.bucket_name).upload_file(Filename=self.data_path, Key=self.s3_data_file)
 		self.lg.web.info("Uploaded file to S3!")
 
 	def download_csv(self):
 		if not(os.path.exists(self.path)):
 			os.mkdir(self.path)
 			self.lg.web.info(f"{self.path} directory created!")
-		self.s3_resource.Bucket(self.bucket_name).download_file("user_data.csv", self.data_path)
+		self.s3_resource.Bucket(self.bucket_name).download_file(self.s3_data_file, self.data_path)
 		self.lg.web.info("Downloaded file from S3!")
