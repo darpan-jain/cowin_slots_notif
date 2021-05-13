@@ -1,14 +1,14 @@
 import multiprocessing
-
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from .configs import config
 
 from check_scheduler.utils.add_users import HandleData
 from check_scheduler.run_checks import Scheduler
 import check_scheduler.utils.loggers as lg
+from .configs import config
+
 
 app = FastAPI(title="Vaccine Slot Availability",
               description="Get notifications about vaccination slot openings",
