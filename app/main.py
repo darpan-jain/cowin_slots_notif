@@ -26,8 +26,9 @@ def run_scheduler():
 async def run_schedulers():
 	data.download_csv()
 	lg.web.info("Starting scheduler for periodic checks..")
-	process = multiprocessing.Process(target=run_scheduler, name="Downloader",daemon=True)
+	process = multiprocessing.Process(target=run_scheduler, name="check_scheduler",daemon=True)
 	workers.append(process)
+	lg.web.info(f"{len(workers)} processes started...")
 	process.start()
 	lg.web.info("Startup tasks complete!")
 
