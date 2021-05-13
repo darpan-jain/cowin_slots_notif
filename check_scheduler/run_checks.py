@@ -32,6 +32,7 @@ class Scheduler:
 				lg.app.warning(f"Error count of {error_count} exceeded limit. Exiting process!")
 				exit(-1)
 
+		lg.app.info(f"Done with periodic check for slot at {datetime.now()}")
 		self.s.enter(freq, 1, self.periodic_check, (error_count, check, notifs, freq,))
 
 	def run(self):
