@@ -18,6 +18,7 @@ class HandleData:
 		)
 		self.s3_resource = self.session.resource('s3')
 		self.bucket_name = self.config.bucket_name
+		self.users_count = 0
 
 	def add_user(self, user_info):
 		self.lg.web.info(f"Adding data for {user_info['fname']} {user_info['lname']}")
@@ -43,3 +44,6 @@ class HandleData:
 			self.lg.web.info(f"{self.path} directory created!")
 		self.s3_resource.Bucket(self.bucket_name).download_file(self.s3_data_file, self.data_path)
 		self.lg.web.info("Downloaded file from S3!")
+		self.user_db = pd.read_csv(self.data_path, index_col=False)
+		self.users_count = self.user_db.shape[0]
+		self.lg.web.info(f"Downloaded database with {self.users_count} details")
