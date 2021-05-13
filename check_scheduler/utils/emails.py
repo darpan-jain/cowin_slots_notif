@@ -75,11 +75,11 @@ class Email:
 			            </strong>
 			        </h2>
 			        <hr>
-					
+
 					<h3>Date: <span style="color: #FF8C00;">{datetime.strptime(self.date, '%d-%m-%Y').strftime('%d, %b, %Y')}</span>
 				    <h3>Found <span style="color: #FF8C00;">{len(self.centers)}</span> centers with slots available!\n</h3>
 				    <p>\n{centers_df.to_html(index=False, justify='center')}</p>
-				
+
 				    <h3>Please log on to https://selfregistration.cowin.gov.in <href="https://selfregistration.cowin.gov.in"> at the earliest to book the slots</h3>
 			    </body>
 			</html>
