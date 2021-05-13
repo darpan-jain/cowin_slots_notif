@@ -47,3 +47,8 @@ class HandleData:
 		self.user_db = pd.read_csv(self.data_path, index_col=False)
 		self.users_count = self.user_db.shape[0]
 		self.lg.web.info(f"Downloaded database with {self.users_count} details")
+
+	@staticmethod
+	def validate_input(user_info):
+		num = str(user_info['number'])
+		return (user_info['fname'].isalpha()) and (user_info['lname'].isalpha()) and num.isdigit() and len(num) == 10
