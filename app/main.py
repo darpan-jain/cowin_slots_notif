@@ -34,12 +34,13 @@ async def run_schedulers():
 
 @app.on_event("shutdown")
 async def app_shutdown():
-	data.upload_csv()
+	lg.web.info("Performing shutdown activities...")
+	data.shutdown_upload()
 	lg.web.info("Killing processes...")
 	for wk in workers:
-		print(f"Terminating {wk.name}")
+		lg.web.info(f"Terminating process: '{wk.name}'")
 		wk.terminate()
-	lg.web.info("Done killing processes!")
+	lg.web.info("Done killing processes! App will shutdown now... :(")
 
 @app.get("/", response_class=HTMLResponse)
 async def submit(request: Request):
