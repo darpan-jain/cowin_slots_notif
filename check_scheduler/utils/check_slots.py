@@ -28,7 +28,7 @@ class CheckForSlots:
 		return centers
 
 	def get_response(self, url, retry_count=0):
-		headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.51"}
+		headers = {"user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"}
 		if (retry_count < self.max_retries):
 			resp = requests.get(url, headers=headers, timeout=5.0)
 			valid_centers = pd.DataFrame()
