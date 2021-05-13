@@ -21,16 +21,22 @@ class HandleData:
 		self.users_count = 0
 
 	def add_user(self, user_info):
-		self.lg.web.info(f"Adding data for {user_info['fname']} {user_info['lname']}")
-		df = pd.read_csv(self.data_path)
-		df.loc[len(df.index)] = [user_info['fname'],
-		                         user_info['lname'],
-		                         user_info['number'],
-		                         user_info['email']]
-		df.to_csv(self.data_path, index=False)
-		if (len(df.index) % 10 == 0):
-			self.lg.web.info("Num of registered users = ",len(df.index))
-			self.upload_csv()
+		if (user_info['email'] not in set(self.user_db['Email'])):
+			self.user_db.loc[len(self.user_db.index)] = [user_info['fname'],
+			                         user_info['lname'],
+			                         user_info['number'],
+			                         user_info['email']]
+			self.lg.web.info(f"Adding data for {user_info['fname']} {user_info['lname']}")
+			self.user_db.to_csv(self.data_path, index=False)
+			self.users_count = self.user_db.shape[0]
+			self.lg.web.info(f"Users count = {self.users_count}")
+			if (len(self.user_db.index) % 10 == 0):
+				self.lg.web.info("Users count = ", self.users_count)
+				self.upload_csv()
+			return True
+		else:
+			self.lg.web.info(f"User {user_info['fname']} {user_info['lname']} already exists!")
+			return False
 
 	def upload_csv(self):
 		self.lg.web.info("Writing user db to csv file.")
