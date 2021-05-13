@@ -38,6 +38,19 @@ class HandleData:
 		self.s3_resource.Bucket(self.bucket_name).upload_file(Filename=self.data_path, Key=self.s3_data_file)
 		self.lg.web.info("Uploaded file to S3!")
 
+	def shutdown_upload(self):
+		s3 = self.session.client('s3')
+		obj = s3.get_object(Bucket=self.bucket_name, Key=self.s3_data_file)
+		s3_db = pd.read_csv(obj['Body'])
+		local_db = pd.read_csv(self.data_path, index_col=False)
+		if (local_db.shape[0] > s3_db.shape[0]):
+			self.lg.web.info(f"Local db users {local_db.shape[0]} > {s3_db.shape[0]} S3 db users")
+			self.lg.web.info(f"Uploading data to S3 as {self.s3_data_file}.csv ...")
+			self.upload_csv()
+		else:
+			self.lg.web.info(f"Local db users {local_db.shape[0]} <= {s3_db.shape[0]} S3 db users")
+			self.lg.web.info("Skipping data upload to S3!")
+
 	def download_csv(self):
 		if not(os.path.exists(self.path)):
 			os.mkdir(self.path)
