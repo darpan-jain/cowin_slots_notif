@@ -1,9 +1,8 @@
 import time
 import requests
 import pandas as pd
-from collections import Counter
-
 import check_scheduler.utils.loggers as lg
+from collections import Counter
 
 class CheckForSlots:
 
@@ -28,11 +27,12 @@ class CheckForSlots:
 		return centers
 
 	def get_response(self, url, retry_count=0):
-		headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.51"}
+		headers = {"user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"}
 		if (retry_count < self.max_retries):
 			resp = requests.get(url, headers=headers, timeout=5.0)
 			valid_centers = pd.DataFrame()
 			self.status_codes.append((resp.status_code))
+			lg.app.debug(f"Response received with status code {resp.status_code}")
 
 			if (resp.status_code == 200):
 				sessions = resp.json()['sessions']
@@ -40,6 +40,7 @@ class CheckForSlots:
 					lg.app.info(f"Found {len(sessions)} sessions to query...")
 					filter_age = filter(lambda x: x['min_age_limit'] < 45, sessions)
 					filter_cap = filter(lambda x: x['available_capacity'] > 0, filter_age)
+					lg.app.debug('Filtering for sessions done.')
 
 					for index, center in enumerate(filter_cap):
 						lg.app.info(f"{center['center_id']}:{center['name']} with {center['available_capacity']} available slots for min age of {center['min_age_limit']}")
@@ -48,7 +49,7 @@ class CheckForSlots:
 			elif resp.status_code == 403:
 				lg.app.debug(f"API {resp.url} returned non-200 status code {resp.status_code}")
 				lg.app.debug(f"Retrying times {retry_count}")
-				time.sleep(3) # Wait for 3 secs before retrying
+				time.sleep(3)  # Wait for 3 secs before retrying
 				self.get_response(url, retry_count+1)
 
 			else:
@@ -56,6 +57,7 @@ class CheckForSlots:
 				lg.app.info("Skipping checks for this iteration.")
 
 			self.status_codes = []
+			lg.app.info(f"Response from {url} filtered and checked. Found {len(valid_centers)} valid centers!")
 			return valid_centers
 
 		else:

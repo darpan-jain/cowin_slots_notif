@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Subscription Complete!</title>
+    <title>Bad Request</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -27,14 +27,12 @@
           <br>
           <br>
           <hr>
-          <h1 style="text-align: center">It's done! Now we wait for updates to roll in!</h1>
+          <h1 style="text-align: center">Incorrect user details added</h1>
           <br>
-          <h3 style="text-align: center;"><strong>Please check your Email</strong> for Updates!</h3>
+          <h3 style="text-align: center;">Please try again with proper details</h3>
           <br>
-          <div style="margin-top: 50px">
-            <marquee behavior="scroll"  scrollmount: 500>
-                <img style="border-radius: 40%;" src="{{ url_for('static', path='/images/jethalal.gif') }}">
-            </marquee>
+          <div style="margin-top: 50px; text-align:center;" class="center">
+              <img height="60%" width="80%"  src="{{ url_for('static', path='/images/bad_request.jpg') }}">
           </div>
           <br>
     </div>

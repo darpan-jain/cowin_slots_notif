@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     sender_pass: str = "<gmail token>"
     aws_access_key: str = "<aws user access key>"
     aws_secret_key: str = "<aws user secret key>"
-    bucket_name: str = "<s3 bucket name>"
+    bucket_name: str = "<S3 bucket name>"
+    s3_file_name: str = "<file name in S3 bucket>"
 
 settings = Settings()
