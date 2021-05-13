@@ -62,10 +62,17 @@ async def submit(request: Request,
 			"number": number,
 			"email": email,
 		}
-		lg.web.info("Received user data: ", user_info)
 		print("Received user data: ", user_info)
-		data.add_user(user_info)
+		if (data.validate_input(user_info)):
+			valid_input = data.add_user(user_info)
+			if (valid_input):
+				return templates.TemplateResponse("thank_you.html", {"request": request, "result": "Done"})
+			else:
+				return templates.TemplateResponse("existing_user.html", {"request": request, "result": "User Exists"})
+		else:
+			return templates.TemplateResponse("bad_request.html", {"request": request, "result": "Bad Request"})
 
 	except Exception as e:
-		print(e)
-	return templates.TemplateResponse("thank_you.html", {"request": request, "result": "Done"})
+		lg.web.info(f"Error encountered: {e}")
+		return templates.TemplateResponse("internal_error.html", {"request": request, "result": "5xx"})
+
